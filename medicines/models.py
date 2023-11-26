@@ -22,6 +22,17 @@ class MedicineType(models.Model):
         return self.name
 
 
+class Manufacturer(models.Model):
+    name = models.CharField(max_length=250)
+    address = models.TextField(blank=True, null=True)
+    contact_number = models.CharField(max_length=20, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    website = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Medicine(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=False)
@@ -37,12 +48,13 @@ class Medicine(models.Model):
     image = models.ImageField(null=True, blank=True, default="default.png")
     stock_quantity = models.IntegerField(default=0)
     total_quantity = models.IntegerField(default=0)
-    alternate_brand = models.CharField(max_length=250, null=True, blank=True)
+    alternate_brands = models.ManyToManyField(
+        Manufacturer, related_name='alternate_brands', blank=True, through='MedicineAlternateBrand')
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True)
     expiry_date = models.DateField(null=True, blank=True)
-    manufacturer_name = models.CharField(max_length=250, null=True, blank=True)
-    manufacturer_address = models.TextField(null=True, blank=True)
+    manufacturer = models.ForeignKey(
+        Manufacturer, on_delete=models.SET_NULL, null=True, blank=True)
     composition = models.TextField(null=True, blank=True)
     prescription_required = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
@@ -58,3 +70,11 @@ class Medicine(models.Model):
 
     def __str__(self):
         return self.generic_name
+
+
+class MedicineAlternateBrand(models.Model):
+    medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE)
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.medicine} - {self.manufacturer}"

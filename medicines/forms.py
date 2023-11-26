@@ -1,4 +1,5 @@
 from django.forms import ModelForm, widgets
+from django.core.exceptions import ValidationError
 from django import forms
 from .models import Medicine
 
@@ -20,17 +21,19 @@ class MedicineForm(ModelForm):
             'expiry_date',
             'stock_quantity',
             'total_quantity',
-            'manufacturer_name',
-            'manufacturer_address',
+            'manufacturer',
             'is_available',
             'composition',
             'description',
             'side_effects',
-            'alternate_brand',
+            'alternate_brands',
             'is_featured',
             'rating',
             'discount_percentage',
         ]
+        widgets = {
+            'alternate_brands': forms.CheckboxSelectMultiple()
+        }
 
     def __init__(self, *args, **kwargs):
         super(MedicineForm, self).__init__(*args, **kwargs)
