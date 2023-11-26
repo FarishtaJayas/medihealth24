@@ -21,7 +21,7 @@ def create_medicine(request):
     form = MedicineForm()
 
     if request.method == "POST":
-        form = MedicineForm(request.POST)
+        form = MedicineForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('medicines')

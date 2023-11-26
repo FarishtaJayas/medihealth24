@@ -6,11 +6,31 @@ from .models import Medicine
 class MedicineForm(ModelForm):
     class Meta:
         model = Medicine
-        fields = ['generic_name', 'description',
-                  'side_effects', 'medicine_type', 'strength', 'sell_price', 'purchase_price', 'pack_size', 'image',
-                  'stock_quantity', 'total_quantity', 'alternate_brand', 'category', 'expiry_date', 'manufacturer_name',
-                  'manufacturer_address', 'composition', 'prescription_required', 'is_featured', 'rating', 'discount_percentage',
-                  'is_available', 'batch_number']
+        fields = [
+            'image',
+            'batch_number',
+            'generic_name',
+            'purchase_price',
+            'sell_price',
+            'medicine_type',
+            'category',
+            'prescription_required',
+            'strength',
+            'pack_size',
+            'expiry_date',
+            'stock_quantity',
+            'total_quantity',
+            'manufacturer_name',
+            'manufacturer_address',
+            'is_available',
+            'composition',
+            'description',
+            'side_effects',
+            'alternate_brand',
+            'is_featured',
+            'rating',
+            'discount_percentage',
+        ]
 
     def __init__(self, *args, **kwargs):
         super(MedicineForm, self).__init__(*args, **kwargs)

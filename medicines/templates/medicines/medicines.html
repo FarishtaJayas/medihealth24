@@ -37,6 +37,11 @@
                   <p class="project__author">{{medicine.manufacturer_name}}</p>
                   <p class="project--rating">
                     <span style="font-weight: bold;">Added</span> {{medicine.created}}
+                    <br>
+                    <div>
+                        <a href="{% url 'update-medicine' medicine.id %}" class="btn btn--sub btn--md  my-md">Edit</a>
+                    <a href="{% url 'delete-medicine' medicine.id %}" class="btn btn--sub btn--md  my-md">Delete</a>
+                    </div>
                   </p>
                 </div>
               </a>
