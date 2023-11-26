@@ -14,13 +14,20 @@ class Category(models.Model):
         return self.name
 
 
+class MedicineType(models.Model):
+    name = models.CharField(max_length=250, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Medicine(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True,
                           primary_key=True, editable=False)
     generic_name = models.CharField(max_length=250, null=True, blank=True)
     description = models.TextField(max_length=3000, blank=True, null=True)
     side_effects = models.TextField(max_length=3000, blank=True, null=True)
-    dosage_form = models.CharField(max_length=250, null=True, blank=True)
     strength = models.CharField(max_length=250, null=True, blank=True)
     sell_price = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True)
@@ -44,6 +51,9 @@ class Medicine(models.Model):
         max_digits=5, decimal_places=2, null=True, blank=True)
     is_available = models.BooleanField(default=True)
     batch_number = models.CharField(max_length=250, null=True, blank=True)
+    express_delivery = models.BooleanField(default=False)
+    medicine_type = models.OneToOneField(
+        MedicineType, on_delete=models.SET_NULL, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

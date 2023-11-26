@@ -445,12 +445,16 @@ img {
 }
 
 .singleProject__preview {
-  height: 50vh;
+  width: 256px
+}
+
+/* .singleProject__preview {
+  height: 10vh;
   object-fit: cover;
   object-position: top center;
   margin-bottom: 3rem;
   border-radius: 0.7rem;
-}
+} */
 
 .singleProject__developer {
   font-size: 1.8rem;
@@ -526,7 +530,7 @@ img {
   width: auto;
   height: auto;
   padding-left: 50px;
-  padding-right: 50px;
+  padding-right: 50px; 
   padding-top: 50px;
   padding-bottom: 50px;
 }
