@@ -28,7 +28,7 @@
           {% for medicine in medicines %}
           <div class="column">
             <div class="card project">
-              <a href="{% url 'medicine' medicine.id %}" class="project">
+              <a href="{% url 'medicine' medicine.id %}" class="project__link" >
                 <div class="project__image-container">
                     <img class="project__image" src="{{medicine.image.url}}" alt="medicine thumbnail" />
                 </div>
