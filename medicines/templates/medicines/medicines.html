@@ -37,9 +37,9 @@
                   <h3 class="project__title">{{medicine.name}}</h3>
                   <p class="project__author">{{medicine.manufacturer_name}}</p>
                   {% if medicine.sell_price %}
-                  <p class="project__author">{{medicine.sell_price}} BDT</p>
+                  <p class="project__author">{{medicine.sell_price}} ৳</p>
                   {% else  %}
-                  <p class="project__author">0 BDT</p>
+                  <p class="project__author">0.00 ৳</p>
                   {% endif %}
                   <p class="project--rating">
                     <span style="font-weight: bold;">Added</span> {{medicine.created}}

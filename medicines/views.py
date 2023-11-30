@@ -27,6 +27,7 @@ def create_medicine(request):
             return redirect('create-medicine')
     context = {
         'form': form,
+        'action': 'Add',
         'object': 'Medicine'
     }
     return render(request, 'medicines/create_form.html', context)
@@ -42,8 +43,8 @@ def update_medicine(request, pk):
             form.save()
             return redirect('medicines')
 
-    context = {'form': form}
-    return render(request, 'medicines/medicine_form.html', context)
+    context = {'form': form, 'object': 'Medicine', 'action': 'Edit'}
+    return render(request, 'medicines/create_form.html', context)
 
 
 def delete_medicine(request, pk):
@@ -71,6 +72,7 @@ def create_category(request):
 
     context = {
         'form': form,
+        'action': 'Add',
         'object': 'Category'
     }
 
@@ -87,6 +89,7 @@ def create_medicine_type(request):
             return redirect('create-medicines')
     context = {
         'form': form,
+        'action': 'Add',
         'object': 'Medicine Type'
     }
 
@@ -103,6 +106,7 @@ def create_manufacturer(request):
             return redirect('create-medicines')
     context = {
         'form': form,
+        'action': 'Add',
         'object': 'Manufacturer'
     }
 
