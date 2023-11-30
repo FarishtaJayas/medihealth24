@@ -5,7 +5,7 @@
     <div class="container container--narrow">
       <a href="{% url 'medicines' %}" class="header__logo">
         
-        <h3>Medihealth24</h3>
+        <h3>MediHealth24</h3>
       </a>
       <nav class="header__nav">
         <input type="checkbox" id="responsive-menu" />
@@ -14,11 +14,18 @@
           <div class="toggle-menu__lines"></div>
         </label>
         <ul class="header__menu">
+          <li class="header__menuItem">
+            <a href="{% url 'create-category' %}">Add Category</a>
+          </li>
+          <li class="header__menuItem">
+            <a href="{% url 'create-manufacturer' %}">Add Manufacturer</a>
+          </li>
+          <li class="header__menuItem">
+            <a href="{% url 'create-medicine-type' %}">Add Medicine Type</a>
+          </li>
           <li class="header__menuItem"><a href="{% url 'create-medicine' %}" class="btn btn--sub">Add Medicine</a></li>
         </ul>
-        <ul class="header__menu">
-            <li class="header__menuItem"><a href="{% url 'create-medicine' %}" class="btn btn--sub">Add Medicine</a></li>
-          </ul>
+
       </nav>
     </div>
   </header>

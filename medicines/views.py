@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from .models import Medicine
-from .forms import MedicineForm
+from .forms import *
 # Create your views here.
 
 
@@ -24,11 +24,12 @@ def create_medicine(request):
         form = MedicineForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('medicines')
+            return redirect('create-medicine')
     context = {
-        'form': form
+        'form': form,
+        'object': 'Medicine'
     }
-    return render(request, 'medicines/medicine_form.html', context)
+    return render(request, 'medicines/create_form.html', context)
 
 
 def update_medicine(request, pk):
@@ -57,3 +58,52 @@ def delete_medicine(request, pk):
     }
 
     return render(request, 'medicines/delete_template.html', context)
+
+
+def create_category(request):
+    form = CategoryForm()
+
+    if request.method == "POST":
+        form = CategoryFomr(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('create-medicine')
+
+    context = {
+        'form': form,
+        'object': 'Category'
+    }
+
+    return render(request, 'medicines/create_form.html', context)
+
+
+def create_medicine_type(request):
+    form = MedicineTypeForm()
+
+    if request.method == "POST":
+        form = MedicineTypeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('create-medicines')
+    context = {
+        'form': form,
+        'object': 'Medicine Type'
+    }
+
+    return render(request, 'medicines/create_form.html', context)
+
+
+def create_manufacturer(request):
+    form = ManufacturerForm()
+
+    if request.method == "POST":
+        form = ManufacturerForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('create-medicines')
+    context = {
+        'form': form,
+        'object': 'Manufacturer'
+    }
+
+    return render(request, 'medicines/create_form.html', context)

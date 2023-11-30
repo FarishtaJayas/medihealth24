@@ -33,16 +33,21 @@
                     <img class="project__image" src="{{medicine.image.url}}" alt="medicine thumbnail" />
                 </div>
                 <div class="card__body">
-                  <h3 class="project__title">{{medicine.generic_name}}</h3>
+                  <h3 class="project__author">{{medicine.generic_name}}</h3>
+                  <h3 class="project__title">{{medicine.name}}</h3>
                   <p class="project__author">{{medicine.manufacturer_name}}</p>
+                  {% if medicine.sell_price %}
+                  <p class="project__author">{{medicine.sell_price}} BDT</p>
+                  {% else  %}
+                  <p class="project__author">0 BDT</p>
+                  {% endif %}
                   <p class="project--rating">
                     <span style="font-weight: bold;">Added</span> {{medicine.created}}
-                    <br>
-                    <div>
-                        <a href="{% url 'update-medicine' medicine.id %}" class="btn btn--sub btn--md  my-md">Edit</a>
-                    <a href="{% url 'delete-medicine' medicine.id %}" class="btn btn--sub btn--md  my-md">Delete</a>
-                    </div>
                   </p>
+                  <div>
+                    <a href="{% url 'update-medicine' medicine.id %}" class="btn btn--sub btn--md  my-md">Edit</a>
+                    <a href="{% url 'delete-medicine' medicine.id %}" class="btn btn--sub btn--md  my-md">Delete</a>
+                </div>
                 </div>
               </a>
             </div>
