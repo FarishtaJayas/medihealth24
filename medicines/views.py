@@ -62,7 +62,7 @@ def delete_medicine(request, pk):
     if request.method == "POST":
         medicine.delete()
         messages.success(request, 'Medicine was deleted successfully')
-        return redirect('create-medicine')
+        return redirect('medicines')
 
     context = {
         'object': medicine
