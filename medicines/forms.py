@@ -9,7 +9,6 @@ class MedicineForm(ModelForm):
         model = Medicine
         fields = [
             'image',
-            'batch_number',
             'generic_name',
             'name',
             'purchase_price',
@@ -27,7 +26,6 @@ class MedicineForm(ModelForm):
             'patient_package_insert',
             'description',
             'is_featured',
-            'rating',
             'discount_percentage',
         ]
         labels = {

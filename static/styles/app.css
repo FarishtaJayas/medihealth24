@@ -875,3 +875,13 @@ img {
   padding-bottom: 10px;
   padding-top: 10px;
 }
+
+.btn--orange {
+  background-color: orange;
+  color: black !important;
+}
+
+.btn--orange:hover {
+  background-color: darkorange;
+  color: white !important;
+}

@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .models import Medicine
 from .forms import *
 # Create your views here.
@@ -16,7 +19,7 @@ def medicine(request, pk):
     context = {'medicine': medicine}
     return render(request, 'medicines/medicine.html', context)
 
-
+@login_required(login_url='login')
 def create_medicine(request):
     form = MedicineForm()
 
@@ -33,6 +36,7 @@ def create_medicine(request):
     return render(request, 'medicines/create_form.html', context)
 
 
+@login_required(login_url='login')
 def update_medicine(request, pk):
     medicine = Medicine.objects.get(id=pk)
     form = MedicineForm(instance=medicine)
@@ -47,6 +51,7 @@ def update_medicine(request, pk):
     return render(request, 'medicines/create_form.html', context)
 
 
+@login_required(login_url='login')
 def delete_medicine(request, pk):
     medicine = Medicine.objects.get(id=pk)
 
@@ -61,6 +66,7 @@ def delete_medicine(request, pk):
     return render(request, 'medicines/delete_template.html', context)
 
 
+@login_required(login_url='login')
 def create_category(request):
     form = CategoryForm()
 
@@ -79,6 +85,7 @@ def create_category(request):
     return render(request, 'medicines/create_form.html', context)
 
 
+@login_required(login_url='login')
 def create_medicine_type(request):
     form = MedicineTypeForm()
 
@@ -96,6 +103,7 @@ def create_medicine_type(request):
     return render(request, 'medicines/create_form.html', context)
 
 
+@login_required(login_url='login')
 def create_manufacturer(request):
     form = ManufacturerForm()
 
@@ -111,3 +119,35 @@ def create_manufacturer(request):
     }
 
     return render(request, 'medicines/create_form.html', context)
+
+
+def login_page(request):
+
+    if request.user.is_authenticated:
+        return redirect('medicines')
+
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            print('Username does not exist')
+            return render(request, 'login.html', {'error_message': 'Username does not exist'})
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('medicines')
+        else:
+            print('Invalid password')
+            return render(request, 'login.html', {'error_message': 'Invalid password'})
+
+    return render(request, 'login.html')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')

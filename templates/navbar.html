@@ -23,7 +23,12 @@
           <li class="header__menuItem">
             <a href="{% url 'create-medicine-type' %}">Add Medicine Type</a>
           </li>
-          <li class="header__menuItem"><a href="{% url 'create-medicine' %}" class="btn btn--sub">Add Medicine</a></li>
+          {% if request.user.is_authenticated %}
+          <li class="header__menuItem"><a href="{% url 'create-medicine' %}" class="btn btn--sub btn--orange">Add Medicine</a></li>
+            <li class="header__menuItem"><a href="{% url 'logout' %}" class="btn btn--sub">Logout</a></li>
+            {% else %}
+            <li class="header__menuItem"><a href="{% url 'login' %}" class="btn btn--sub">Login</a></li>
+          {% endif %}
         </ul>
 
       </nav>
