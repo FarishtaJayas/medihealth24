@@ -14,10 +14,18 @@
                 <!-- Input:Text -->
                 {% for field in form %}
                 <div class="form__field">
-                    <label for="formInput#text">{{field.label}} </label>
-                    {{field}}
-                </div>
-                {% endfor %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }} </label>
+                    {{ field }}
+
+                    {% if field.help_text %}
+                    <small>{{ field.help_text }}</small>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                        <p>Error: {{ error }}</p>
+                    {% endfor %}
+                    </div>
+                    {% endfor %}
 
                 <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
             </form>

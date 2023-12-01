@@ -20,9 +20,54 @@
 
   <title>Medihealth24</title>
 </head>
-<body>
-    {% include "navbar.html" %}
-    {% block content %}
-    {% endblock %}
-</body>
+{% include 'navbar.html' %}
+    {% if messages %} 
+    {% for message in messages %}
+    <div
+      class="alert  alert--{{message.tags}}"
+      style="
+        position: fixed;
+        left: 50%;
+        top: 120px;
+        transform: translate(-50%, -50%);
+
+
+        z-index: 99999; 
+      "
+    >
+      <p class="alert__message">{{message}}</p>
+      <button
+        class="alert__close"
+        style="
+          background: transparent;
+          cursor: pointer;
+          border: none;
+          outline: transparent;
+          font-size: 2rem;
+          transition: var(--generic-transition);
+        "
+      >
+        x
+      </button>
+    </div>
+    {% endfor %} 
+    {% endif %} 
+    {% block content %} 
+    {% endblock content %}
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      hljs.highlightAll();
+    });
+
+    let alertWrapper = document.querySelector(".alert");
+    let alertClose = document.querySelector(".alert__close");
+
+    if (alertWrapper) {
+      alertClose.addEventListener(
+        "click",
+        () => (alertWrapper.style.display = "none")
+      );
+    }
+  </script>
 </html>
