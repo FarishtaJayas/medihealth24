@@ -6,12 +6,13 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import Medicine
 from .forms import *
+from .utils import search_medicines
 # Create your views here.
 
 
 def medicines(request):
-    medicines = Medicine.objects.all()
-    context = {'medicines': medicines}
+    medicines, search_query = search_medicines(request)
+    context = {'medicines': medicines, 'search_query': search_query}
     return render(request, 'medicines/medicines.html', context)
 
 
