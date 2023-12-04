@@ -6,13 +6,17 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import Medicine
 from .forms import *
-from .utils import search_medicines
+from .utils import search_medicines, paginate_medicines
 # Create your views here.
 
 
 def medicines(request):
     medicines, search_query = search_medicines(request)
-    context = {'medicines': medicines, 'search_query': search_query}
+    custom_range, medicines = paginate_medicines(request, medicines, 6)
+    context = {'medicines': medicines,
+               'search_query': search_query,
+               'custom_range': custom_range
+               }
     return render(request, 'medicines/medicines.html', context)
 
 

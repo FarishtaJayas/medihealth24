@@ -77,3 +77,7 @@ class Medicine(models.Model):
 
     def __str__(self):
         return self.generic_name
+
+    class Meta:
+        ordering = ['-created']
+        # the dash makes it descending
