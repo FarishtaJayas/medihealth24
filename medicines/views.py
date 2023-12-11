@@ -33,9 +33,26 @@ def create_medicine(request):
     if request.method == "POST":
         form = MedicineForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Medicine was added successfully')
-            return redirect('create-medicine')
+            name = form.cleaned_data['name']
+            strength = form.cleaned_data['strength']
+            manufacturer = form.cleaned_data['manufacturer']
+            medicine_type = form.cleaned_data['medicine_type']
+
+            matching_medicines = Medicine.objects.filter(
+                name=name, strength=strength, manufacturer=manufacturer, medicine_type=medicine_type)
+            if matching_medicines.exists():
+                for med in matching_medicines:
+
+                    if (med.name == name and med.strength == strength and med.manufacturer == manufacturer and med.medicine_type == medicine_type):
+                        messages.error(
+                            request, 'Medicine with this combination already exists. Please enter a different combination.')
+                        return render_with_data(request, form)
+            else:
+                form.save()
+                messages.success(
+                    request, 'Medicine was added successfully')
+                return redirect('create-medicine')
+
     context = {
         'form': form,
         'action': 'Add',
@@ -163,3 +180,12 @@ def logout_user(request):
     logout(request)
     messages.success(request, 'User was logged out')
     return redirect('login')
+
+
+def render_with_data(request, form):
+    context = {
+        'form': form,
+        'action': 'Add',
+        'object': 'Medicine'
+    }
+    return render(request, 'medicines/create_form.html', context)

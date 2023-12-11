@@ -76,7 +76,7 @@ class Medicine(models.Model):
     is_available = models.BooleanField(default=True)
     batch_number = models.CharField(max_length=250, null=True, blank=True)
     express_delivery = models.BooleanField(default=False)
-    medicine_type = models.OneToOneField(
+    medicine_type = models.ForeignKey(
         MedicineType, on_delete=models.SET_NULL, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
