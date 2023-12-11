@@ -1,6 +1,9 @@
 from django.db import models
 import uuid
 from django.utils import timezone
+from django.contrib import messages
+from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -54,6 +57,8 @@ class Medicine(models.Model):
     purchase_price = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True)
     pack_size = models.CharField(max_length=250, null=True, blank=True)
+    unit_of_measurement = models.CharField(
+        max_length=250, null=True, blank=True)
     image = models.ImageField(null=True, blank=True, default="default.png")
     stock_quantity = models.IntegerField(default=0)
     total_quantity = models.IntegerField(default=0)

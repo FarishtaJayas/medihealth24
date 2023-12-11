@@ -14,10 +14,11 @@ class MedicineForm(ModelForm):
             'purchase_price',
             'sell_price',
             'medicine_type',
+            'pack_size',
+            'unit_of_measurement',
             'category',
             'prescription_required',
             'strength',
-            'pack_size',
             'expiry_date',
             'stock_quantity',
             'total_quantity',
@@ -29,7 +30,8 @@ class MedicineForm(ModelForm):
             'discount_percentage',
         ]
         labels = {
-            'patient_package_insert': 'Description PDF File'
+            'patient_package_insert': 'Description PDF File',
+            'unit_of_measurement': 'Unit of Measurement (UOM)'
         }
         widgets = {
             'alternate_brands': forms.CheckboxSelectMultiple()
