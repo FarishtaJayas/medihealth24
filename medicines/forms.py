@@ -15,32 +15,11 @@ class MedicineForm(ModelForm):
 
     class Meta:
         model = Medicine
-        # fields = [
-        #     'image',
-        #     'generic_name',
-        #     'name',
-        #     'purchase_price',
-        #     'sell_price',
-        #     'medicine_type',
-        #     'pack_size',
-        #     'unit_of_measurement',
-        #     'category',
-        #     'prescription_required',
-        #     'strength',
-        #     'expiry_date',
-        #     'stock_quantity',
-        #     'total_quantity',
-        #     'manufacturer',
-        #     'is_available',
-        #     'patient_package_insert',
-        #     'description',
-        #     'is_featured',
-        #     'discount_percentage',
-        # ]
         fields = [
+            'image',
+            'generic_name',
             'name',
             'strength',
-            'generic_name',
             'manufacturer',
             'sell_price',
             'prescription_required',
@@ -48,7 +27,6 @@ class MedicineForm(ModelForm):
             'pack_size',
             'unit_of_measurement',
             'category',
-            'image',
             'patient_package_insert',
         ]
         labels = {

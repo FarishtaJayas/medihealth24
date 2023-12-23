@@ -222,9 +222,9 @@ def add_generic_name(request):
                     file.write(f'    "{name}",\n')
                 file.write("]\n")
 
-            print("After:", generic_names)
+            messages.success(request, 'Generic name added successfully')
 
-            return redirect('add-generic-name')
+            return redirect('create-medicine')
 
     context = {
         'form': form,

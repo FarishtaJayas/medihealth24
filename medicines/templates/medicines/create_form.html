@@ -22,9 +22,11 @@
                         <script>
                             document.addEventListener('DOMContentLoaded', function () {
                                 document.querySelector('#{{ field.id_for_label }}').classList.add('responsive-generic-name');
-                                $('.responsive-generic-name').select2(); // Initialize Select2
+                                $('.responsive-generic-name').select2();
                             });
                         </script>
+
+                        <a href="{% url 'add-generic-name' %}">Add Generic Name</a>
                     {% endif %}
 
                     {% for error in field.errors %}
