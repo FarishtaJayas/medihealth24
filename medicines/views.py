@@ -200,3 +200,39 @@ def render_with_data(request, form):
         'object': 'Medicine'
     }
     return render(request, 'medicines/create_form.html', context)
+
+
+def add_generic_name(request):
+    form = GenericNameForm()
+
+    if request.method == "POST":
+        form = GenericNameForm(request.POST)
+        if form.is_valid():
+            generic_name = form.cleaned_data['generic_name']
+
+            from .generic_names import generic_names
+
+            print("Before:", generic_names)
+
+            generic_names.append(generic_name)
+
+            with open('medicines/generic_names.py', 'w') as file:
+                file.write("generic_names = [\n")
+                for name in generic_names:
+                    file.write(f'    "{name}",\n')
+                file.write("]\n")
+
+            print("After:", generic_names)
+
+            return redirect('add-generic-name')
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'medicines/add_generic_name.html', context)
+
+
+
+
+
+

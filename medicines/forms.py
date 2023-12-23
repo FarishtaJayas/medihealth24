@@ -3,11 +3,15 @@ from .generic_names import generic_names
 from django.core.exceptions import ValidationError
 from django import forms
 from .models import *
+from django_select2 import forms as select2forms
+
 
 
 class MedicineForm(ModelForm):
     generic_name = forms.ChoiceField(
-        choices=[(name, name[:80]) for name in generic_names])
+        choices=[(name, name[:80]) for name in generic_names],
+        widget=select2forms.Select2Widget  # Add this line to use Select2
+    )
 
     class Meta:
         model = Medicine
@@ -38,6 +42,7 @@ class MedicineForm(ModelForm):
             'strength',
             'generic_name',
             'manufacturer',
+            'sell_price',
             'prescription_required',
             'medicine_type',
             'pack_size',
@@ -96,3 +101,11 @@ class ManufacturerForm(forms.ModelForm):
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'input'})
+
+
+class GenericNameForm(forms.Form):
+    generic_name = forms.CharField(
+        label='Generic Name',
+        max_length=250,
+        widget=forms.TextInput(attrs={'class': 'input'})
+    )

@@ -22,6 +22,7 @@
                         <script>
                             document.addEventListener('DOMContentLoaded', function () {
                                 document.querySelector('#{{ field.id_for_label }}').classList.add('responsive-generic-name');
+                                $('.responsive-generic-name').select2(); // Initialize Select2
                             });
                         </script>
                     {% endif %}
@@ -40,5 +41,14 @@
             </form>
         </div>
     </div>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Include Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Include Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 </main>
 {% endblock %}

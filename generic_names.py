@@ -1743,4 +1743,5 @@ generic_names = [
     "Zonisamide",
     "Zopiclone",
     "Zuclopenthixol Decanoate",
+    "ye",
 ]
