@@ -10,7 +10,7 @@ from django_select2 import forms as select2forms
 class MedicineForm(ModelForm):
     generic_name = forms.ChoiceField(
         choices=[(name, name[:80]) for name in generic_names],
-        widget=select2forms.Select2Widget  # Add this line to use Select2
+        widget=select2forms.Select2Widget 
     )
 
     class Meta:
