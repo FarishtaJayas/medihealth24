@@ -1,44 +1,61 @@
 from django.forms import ModelForm, widgets
+from .generic_names import generic_names
 from django.core.exceptions import ValidationError
 from django import forms
 from .models import *
 
 
 class MedicineForm(ModelForm):
+    generic_name = forms.ChoiceField(
+        choices=[(name, name[:80]) for name in generic_names])
+
     class Meta:
         model = Medicine
+        # fields = [
+        #     'image',
+        #     'generic_name',
+        #     'name',
+        #     'purchase_price',
+        #     'sell_price',
+        #     'medicine_type',
+        #     'pack_size',
+        #     'unit_of_measurement',
+        #     'category',
+        #     'prescription_required',
+        #     'strength',
+        #     'expiry_date',
+        #     'stock_quantity',
+        #     'total_quantity',
+        #     'manufacturer',
+        #     'is_available',
+        #     'patient_package_insert',
+        #     'description',
+        #     'is_featured',
+        #     'discount_percentage',
+        # ]
         fields = [
-            'image',
-            'generic_name',
             'name',
-            'purchase_price',
-            'sell_price',
+            'strength',
+            'generic_name',
+            'manufacturer',
+            'prescription_required',
             'medicine_type',
             'pack_size',
             'unit_of_measurement',
             'category',
-            'prescription_required',
-            'strength',
-            'expiry_date',
-            'stock_quantity',
-            'total_quantity',
-            'manufacturer',
-            'is_available',
+            'image',
             'patient_package_insert',
-            'description',
-            'is_featured',
-            'discount_percentage',
         ]
         labels = {
             'patient_package_insert': 'Description PDF File',
             'unit_of_measurement': 'Unit of Measurement (UOM)'
         }
-        widgets = {
-            'alternate_brands': forms.CheckboxSelectMultiple()
-        }
 
     def __init__(self, *args, **kwargs):
         super(MedicineForm, self).__init__(*args, **kwargs)
+
+        self.fields['generic_name'].widget.attrs.update(
+            {'class': 'responsive-generic-name'})
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'input'})

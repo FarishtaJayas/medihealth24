@@ -1,0 +1,91 @@
+{% extends "main.html" %}
+
+{% block content %}
+<main class="singleProject my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <h3 class="singleProject__subtitle">Category</h3>
+          <div class="singleProject__toolStack">
+            <span class="tag tag--pill tag--sub tag--lg">
+              <small>{{medicine.category}}</small>
+            </span>
+            <span class="tag tag--pill tag--sub tag--lg">
+              <small>{{medicine.medicine_type}}</small>
+            </span>
+          </div>
+          Sale Price:<a class="singleProject__liveLink" href="#" target="_blank"><i class="im im-external-link"></i>{{medicine.sell_price}} ৳
+          </a>
+          <br>
+          Purchase Price:<a class="singleProject__liveLink" href="#" target="_blank"><i class="im im-external-link"></i>{{medicine.purchase_price}} ৳
+          </a>
+        </div>
+        <div class="column column--2of3">
+          <img class="singleProject__preview" src="{{medicine.image.url}}" alt="portfolio thumbnail" />
+          <br>
+          <a href="profile.html" class="singleProject__developer">Manufacturered by {{medicine.manufacturer_name}}</a>
+          <h2 class="singleProject__title">{{medicine.name}}</h2>
+          <h3 class="singleProject__subtitle">Generic Name</h3>
+          <div class="singleProject__info">
+             {{medicine.generic_name}}
+          </div>
+          <div class="singleProject__info">
+          </div>
+          <br>
+
+          <!-- <div class="comments">
+            <h3 class="singleProject__subtitle">Prescription Required</h3>
+            <h5 class="project--rating">
+              {{medicine.prescription_required}}
+            </h5>
+          </div> -->
+
+          <div>
+            <h3 class="singleProject__subtitle">Details</h3>
+            <table class="table table-bordered">
+              <thead>
+                  <tr>
+                      <th scope="col">Detail</th>
+                      <th scope="col">Value</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>Prescription Required</td>
+                      <td>{{medicine.prescription_required}}</td>
+                  </tr>
+                  <tr>
+                      <td>Details PDF</td>
+                      <td>{% if medicine.patient_package_insert %}
+                        <a href="{{ medicine.patient_package_insert.url }}" download>
+                            Download Prescription PDF
+                        </a>
+                    {% else %}
+                        <p>No prescription PDF available</p>
+                    {% endif %}</td>
+                  </tr>
+                  <tr>
+                    <td>Some Other Detail</td>
+                    <td>{{medicine.some_other_detail}}</td>
+                </tr>
+                <tr>
+                  <td>Some Other Detail</td>
+                  <td>{{medicine.some_other_detail}}</td>
+              </tr>
+              <tr>
+                <td>Some Other Detail</td>
+                <td>{{medicine.some_other_detail}}</td>
+            </tr>
+            <tr>
+              <td>Some Other Detail</td>
+              <td>{{medicine.some_other_detail}}</td>
+          </tr>
+              </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </main>
+{% endblock %}
