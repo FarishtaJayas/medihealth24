@@ -68,7 +68,8 @@ class Medicine(models.Model):
     manufacturer = models.ForeignKey(
         Manufacturer, on_delete=models.SET_NULL, null=True, blank=True)
     composition = models.TextField(null=True, blank=True)
-    prescription_required = models.BooleanField(default=False)
+    prescription_required = models.BooleanField(default=True)
+    returnable_item = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
     rating = models.FloatField(null=True, blank=True)
     discount_percentage = models.DecimalField(

@@ -15,20 +15,7 @@
                 {% for field in form %}
                 <div class="form__field">
                     <label for="{{ field.id_for_label }}">{{ field.label }} </label>
-                    
                     {{ field }}
-                    
-                    {% if field.name == 'generic_name' %}
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                                document.querySelector('#{{ field.id_for_label }}').classList.add('responsive-generic-name');
-                                $('.responsive-generic-name').select2();
-                            });
-                        </script>
-
-                        <a href="{% url 'add-generic-name' %}">Add Generic Name</a>
-                    {% endif %}
-
                     {% for error in field.errors %}
                         <p style="color: red;">Error: {{ error }}</p>
                     {% endfor %}
