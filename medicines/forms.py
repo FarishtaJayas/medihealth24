@@ -10,8 +10,8 @@ class MedicineForm(ModelForm):
         model = Medicine
         fields = [
             'image',
-            'generic_name',
             'name',
+            'generic_name',
             'strength',
             'manufacturer',
             'sell_price',

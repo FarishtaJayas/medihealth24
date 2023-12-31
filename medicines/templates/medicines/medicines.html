@@ -9,16 +9,23 @@
         </div>
 
         <div class="hero-section__search">
+          <a href="{% url 'create-medicine' %}" class="btn btn--sub btn--orange">Add Medicine</a>
           <form id="searchForm" class="form" action="{% url 'medicines' %}" method="get">
             <div class="form__field">
               <label for="formInput#search">Search By Medicine </label>
               <input class="input input--text" id="formInput#search" type="text" name="search_query"
-                value="{{search_query}}" placeholder="Search by Medicine Title" />
+                value="{{search_query}}" placeholder="Search by Medicine Title, Generic Name or Manufacturer" />
             </div>
-
             <input class="btn btn--sub btn--lg" type="submit" value="Search" />
           </form>
         </div>
+      </div>
+    </section>
+    <section class="container">
+      <h2 class="section-heading">Statistics</h2>
+      <div class="total-medicines">
+        <span>Total medicines added:</span>
+        <span class="count">{{ medicine_count }}</span>
       </div>
     </section>
     <!-- Search Result: DevList -->

@@ -6,13 +6,20 @@
                 <br>
                 <form class="form" action="" method="POST">
                     {% csrf_token %}
-                    <p>Are you sure you want to delete "{{ object }}"?</p>
+                    <p>
+                        Are you sure you want to delete
+                        {% if object %}
+                            "{{ object.name }}"
+                        {% else %}
+                            "Medicine"
+                        {% endif %}?
+                    </p>
                     <a class="btn btn--sub btn--lg  my-md" href="{% url 'medicines' %}">
-                    Go back
+                        Go back
                     </a>
                     <input class="btn btn--sub btn--lg  my-md" type="submit" value="Confirm" />
                 </form>
             </div>
         </div>
-      </main>
+    </main>
 {% endblock %}

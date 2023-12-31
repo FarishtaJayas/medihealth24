@@ -13,9 +13,11 @@ from .utils import search_medicines, paginate_medicines
 def medicines(request):
     medicines, search_query = search_medicines(request)
     custom_range, medicines = paginate_medicines(request, medicines, 6)
+    medicine_count = Medicine.objects.count()
     context = {'medicines': medicines,
                'search_query': search_query,
-               'custom_range': custom_range
+               'custom_range': custom_range,
+               'medicine_count': medicine_count,
                }
     return render(request, 'medicines/medicines.html', context)
 

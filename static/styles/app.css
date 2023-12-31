@@ -898,3 +898,26 @@ img {
   }
 }
 
+.total-medicines {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.total-medicines span {
+  font-size: 18px;
+  color: #333; /* Adjust color as needed */
+}
+
+.total-medicines .count {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff5722; /* Adjust color as needed */
+  margin-left: 5px;
+}
+.section-heading {
+  text-align: center;
+  font-size: 24px;
+  color: #333; /* Adjust color as needed */
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
