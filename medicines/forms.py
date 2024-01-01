@@ -4,7 +4,6 @@ from django import forms
 from .models import *
 
 
-
 class MedicineForm(ModelForm):
     class Meta:
         model = Medicine
@@ -16,6 +15,7 @@ class MedicineForm(ModelForm):
             'manufacturer',
             'sell_price',
             'prescription_required',
+            'refrigerated',
             'returnable_item',
             'medicine_type',
             'pack_size',
@@ -24,7 +24,7 @@ class MedicineForm(ModelForm):
             'patient_package_insert',
         ]
         labels = {
-            'returnable_item' : 'Can Return Item?',
+            'returnable_item': 'Can Return Item?',
             'patient_package_insert': 'Description PDF File',
             'unit_of_measurement': 'Unit of Measurement (UOM)'
         }

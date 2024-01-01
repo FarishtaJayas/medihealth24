@@ -69,6 +69,7 @@ class Medicine(models.Model):
         Manufacturer, on_delete=models.SET_NULL, null=True, blank=True)
     composition = models.TextField(null=True, blank=True)
     prescription_required = models.BooleanField(default=True)
+    refrigerated = models.BooleanField(default=False)
     returnable_item = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
     rating = models.FloatField(null=True, blank=True)
