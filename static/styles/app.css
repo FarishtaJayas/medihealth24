@@ -921,3 +921,13 @@ img {
   margin-bottom: 20px;
   margin-top: 20px;
 }
+
+.select2-container--default {
+  width: 400px !important;
+}
+
+@media (max-width: 768px) {
+    .select2-container--default {
+        width: auto !important;
+    }
+}

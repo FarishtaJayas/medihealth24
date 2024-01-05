@@ -1,5 +1,6 @@
 {% extends "main.html" %}
 {% block content %}
+    {{ form.media.css }}
 <main class="formPage my-xl">
     <div class="content-box">
         <div class="formWrapper">
@@ -28,6 +29,8 @@
 
                 <input class="btn btn--sub btn--lg my-md" type="submit" value="Submit" />
             </form>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{ form.media.js }}
         </div>
     </div>
 
@@ -39,5 +42,6 @@
 
     <!-- Include Select2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 </main>
 {% endblock %}
