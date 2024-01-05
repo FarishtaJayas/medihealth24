@@ -1,47 +1,49 @@
 {% extends "main.html" %}
 {% block content %}
     {{ form.media.css }}
-<main class="formPage my-xl">
-    <div class="content-box">
-        <div class="formWrapper">
-            <div class="auth__header text-center">
-                <h3>{{ action }} {{ object }}</h3>
-            </div>
-            <a class="backButton" href="{% url 'medicines' %}"><</a>
-            <br>
-
-            <form class="form" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <!-- Input:Text -->
-                {% for field in form %}
-                <div class="form__field">
-                    <label for="{{ field.id_for_label }}">{{ field.label }} </label>
-                    {{ field }}
-                    {% for error in field.errors %}
-                        <p style="color: red;">Error: {{ error }}</p>
-                    {% endfor %}
+    <main class="formPage my-xl">
+        <div class="content-box">
+            <div class="formWrapper">
+                <div class="auth__header text-center">
+                    <h3>{{ action }} {{ object }}</h3>
                 </div>
-                {% endfor %}
+                <a class="backButton" href="{% url 'medicines' %}"><</a>
+                <br>
 
-                {% if field.help_text %}
-                    <small>{{ field.help_text }}</small>
-                {% endif %}
+                <form class="form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Input:Text -->
+                    {% for field in form %}
+                        <div class="form__field">
+                            <label for="{{ field.id_for_label }}">{{ field.label }} </label>
+                            {{ field }}
+                            {% if field.name == 'pack_size' %}
+                                <p class="cool-message">Remember, no words like tablets or capsules on pack size 🚀</p>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <p style="color: red;">Error: {{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
 
-                <input class="btn btn--sub btn--lg my-md" type="submit" value="Submit" />
-            </form>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    {{ form.media.js }}
+                    {% if field.help_text %}
+                        <small>{{ field.help_text }}</small>
+                    {% endif %}
+
+                    <input class="btn btn--sub btn--lg my-md" type="submit" value="Submit"/>
+                </form>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                {{ form.media.js }}
+            </div>
         </div>
-    </div>
 
-    <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <!-- Include jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    <!-- Include Select2 CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+        <!-- Include Select2 CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet"/>
 
-    <!-- Include Select2 JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-</main>
+        <!-- Include Select2 JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    </main>
 {% endblock %}
