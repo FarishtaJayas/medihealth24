@@ -1,71 +1,76 @@
 {% extends "main.html" %}
-
+{% load static %}
 {% block content %}
-<main class="singleProject my-md">
-    <div class="container">
-      <div class="column column--2of3">
-        <img class="singleProject__preview" src="{{medicine.image.url}}" alt="portfolio thumbnail" />
-        <br>
-        <h2 class="singleProject__title">{{medicine.name}}</h2>
-        <div>
-          <h3 class="singleProject__subtitle">Details</h3>
-          <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Detail</th>
-                    <th scope="col">Value</th>
-                </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Generic Name</td>
-                <td>{{medicine.generic_name}}</td>
-                </tr>
-                <tr>
-                  <td>Manufacturered By</td>
-                  <td>{{medicine.manufacturer}}</td>
-              </tr>
-              <tr>
-                <td>Strength</td>
-                <td>{{medicine.strength}}</td>
-              </tr>
-              <tr>
-                <td>Selling Price</td>
-                {% if medicine.sell_price %}
-                  <td>{{medicine.sell_price}} ৳</td>
+    <main class="singleProject my-md">
+        <div class="container">
+            <div class="column column--2of3">
+                {% if medicine.image and medicine.image.url %}
+                    <img class="singleProject__preview" src="{{ medicine.image.url }}" alt="portfolio thumbnail"/>
                 {% else %}
-                  <td>0 ৳</td>
+                    <img class="singleProject__preview" src="{% static 'images/default.png' %}"
+                         alt="portfolio thumbnail"/>
                 {% endif %}
-              </tr>
-              <tr>
-                <td>Pack Size</td>
-                <td>{{medicine.pack_size}}</td>
-              </tr>
-              <tr>
-                <td>Unit Of Measurement</td>
-                <td>{{medicine.unit_of_measurement}}</td>
-              </tr>
-                <tr>
-                    <td>Prescription Required</td>
-                    <td>{{medicine.prescription_required}}</td>
-                </tr>
-                <tr>
-                    <td>Details PDF</td>
-                    <td>{% if medicine.patient_package_insert %}
-                      <a href="{{ medicine.patient_package_insert.url }}" download>
-                          Download Prescription PDF
-                      </a>
-                  {% else %}
-                      <p>No prescription PDF available</p>
-                  {% endif %}</td>
-                </tr>
-            </tbody>
-        </table>
-        <a href="{% url 'update-medicine' medicine.id %}" class="btn btn--sub btn--md  my-md">Edit</a>
-        <a href="{% url 'delete-medicine' medicine.id %}" class="btn btn--sub btn--md  my-md">Delete</a>
+                <br>
+                <h2 class="singleProject__title">{{ medicine.name }}</h2>
+                <div>
+                    <h3 class="singleProject__subtitle">Details</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">Detail</th>
+                            <th scope="col">Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Generic Name</td>
+                            <td>{{ medicine.generic_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Manufacturered By</td>
+                            <td>{{ medicine.manufacturer }}</td>
+                        </tr>
+                        <tr>
+                            <td>Strength</td>
+                            <td>{{ medicine.strength }}</td>
+                        </tr>
+                        <tr>
+                            <td>Selling Price</td>
+                            {% if medicine.sell_price %}
+                                <td>{{ medicine.sell_price }} ৳</td>
+                            {% else %}
+                                <td>0 ৳</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>Pack Size</td>
+                            <td>{{ medicine.pack_size }}</td>
+                        </tr>
+                        <tr>
+                            <td>Unit Of Measurement</td>
+                            <td>{{ medicine.unit_of_measurement }}</td>
+                        </tr>
+                        <tr>
+                            <td>Prescription Required</td>
+                            <td>{{ medicine.prescription_required }}</td>
+                        </tr>
+                        <tr>
+                            <td>Details PDF</td>
+                            <td>{% if medicine.patient_package_insert %}
+                                <a href="{{ medicine.patient_package_insert.url }}" download>
+                                    Download Prescription PDF
+                                </a>
+                            {% else %}
+                                <p>No prescription PDF available</p>
+                            {% endif %}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a href="{% url 'update-medicine' medicine.id %}" class="btn btn--sub btn--md  my-md">Edit</a>
+                    <a href="{% url 'delete-medicine' medicine.id %}" class="btn btn--sub btn--md  my-md">Delete</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    </div>
-  </main>
+        </div>
+    </main>
 {% endblock %}
