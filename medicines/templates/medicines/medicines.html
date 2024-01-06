@@ -1,5 +1,5 @@
 {% extends "main.html" %}
-
+{% load static %}
 {% block content %}
 <main class="projects">
     <section class="hero-section text-center">
@@ -37,7 +37,11 @@
             <div class="card project">
               <a href="{% url 'medicine' medicine.id %}" class="project__link" >
                 <div class="project__image-container">
-                    <img class="project__image" src="{{medicine.image.url}}" alt="medicine thumbnail" />
+                    {% if medicine.image and medicine.image.url %}
+                        <img class="project__image" src="{{ medicine.image.url }}" alt="medicine thumbnail" />
+                    {% else %}
+                        <img class="project__image" src="{% static 'images/default.png' %}" alt="default thumbnail" />
+                    {% endif %}
                 </div>
                 <div class="card__body">
                   <h3 class="project__author">{{medicine.generic_name}}</h3>
