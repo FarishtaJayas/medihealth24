@@ -2,13 +2,8 @@ from django.forms import ModelForm, widgets
 from django.core.exceptions import ValidationError
 from django import forms
 from .models import *
-from django_select2 import forms as s2forms
 
 
-class ManufacturerWidgets(s2forms.ModelSelect2Widget):
-    search_fields = [
-        'name__icontains',
-    ]
 class MedicineForm(ModelForm):
     class Meta:
         model = Medicine
@@ -20,7 +15,7 @@ class MedicineForm(ModelForm):
             'manufacturer',
             'sell_price',
             'prescription_required',
-            'refrigerated',
+            # 'refrigerated',
             'returnable_item',
             'medicine_type',
             'pack_size',
@@ -28,9 +23,6 @@ class MedicineForm(ModelForm):
             'category',
             'patient_package_insert',
         ]
-        widgets = {
-            "manufacturer": ManufacturerWidgets()
-        }
         labels = {
             'returnable_item': 'Can Return Item?',
             'patient_package_insert': 'Description PDF File',

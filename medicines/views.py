@@ -141,20 +141,9 @@ def create_manufacturer(request):
     if request.method == "POST":
         form = ManufacturerForm(request.POST, request.FILES)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            
-            matching_manufacturer = Manufacturer.objects.filter(name=name)
-            
-            if matching_manufacturer.exists():
-                messages.error(
-                            request, 'Manufacturer with this Name already exists.')
-                return render_with_data(request, form)
-            
-            else:
-                form.save()
-                messages.success(request, 'Manufacturer was added successfully')
-                return redirect('medicines')
-            
+            form.save()
+            messages.success(request, 'Manufacturer was added successfully')
+            return redirect('medicines')
     context = {
         'form': form,
         'action': 'Add',
