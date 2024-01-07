@@ -1,12 +1,14 @@
-from django.shortcuts import render
 from django.contrib import messages
-from django.shortcuts import redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Medicine
+from django.shortcuts import redirect
+from django.shortcuts import render
+
 from .forms import *
 from .utils import search_medicines, paginate_medicines
+
+
 # Create your views here.
 
 
@@ -45,9 +47,11 @@ def create_medicine(request):
             if matching_medicines.exists():
                 for med in matching_medicines:
 
-                    if (med.name == name and med.strength == strength and med.manufacturer == manufacturer and med.medicine_type == medicine_type):
+                    if (
+                            med.name == name and med.strength == strength and med.manufacturer == manufacturer and med.medicine_type == medicine_type):
                         messages.error(
-                            request, 'Medicine with this combination already exists. Please enter a different combination.')
+                            request,
+                            'Medicine with this combination already exists. Please enter a different combination.')
                         return render_with_data(request, form)
             else:
                 form.save()
@@ -154,7 +158,6 @@ def create_manufacturer(request):
 
 
 def login_page(request):
-
     if request.user.is_authenticated:
         return redirect('medicines')
 
@@ -191,10 +194,3 @@ def render_with_data(request, form):
         'object': 'Medicine'
     }
     return render(request, 'medicines/create_form.html', context)
-
-
-
-
-
-
-

@@ -1,9 +1,8 @@
-from django.db import models
 import uuid
-from django.utils import timezone
-from django.contrib import messages
-from django.core.exceptions import ValidationError
-from django.contrib.auth.models import User
+
+from django.db import models
+
+
 # Create your models here.
 
 
@@ -69,6 +68,7 @@ class Medicine(models.Model):
         Manufacturer, on_delete=models.SET_NULL, null=True, blank=True)
     composition = models.TextField(null=True, blank=True)
     prescription_required = models.BooleanField(default=True)
+    refrigerated = models.BooleanField(default=False)
     returnable_item = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
     rating = models.FloatField(null=True, blank=True)

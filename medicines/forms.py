@@ -1,10 +1,25 @@
-from django.forms import ModelForm, widgets
-from django.core.exceptions import ValidationError
 from django import forms
+from django.forms import ModelForm, ModelChoiceField
+
 from .models import *
 
 
+class ManufacturerSearchInput(forms.TextInput):
+    input_type = 'search'
+
+
+class ManufacturerChoiceField(ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj.name
+
+
 class MedicineForm(ModelForm):
+    manufacturer = ManufacturerChoiceField(
+        label='Manufacturer',
+        queryset=Manufacturer.objects.all(),
+        widget=ManufacturerSearchInput(attrs={'class': 'input searchable-input'}),
+    )
+
     class Meta:
         model = Medicine
         fields = [
@@ -15,7 +30,7 @@ class MedicineForm(ModelForm):
             'manufacturer',
             'sell_price',
             'prescription_required',
-            # 'refrigerated',
+            'refrigerated',
             'returnable_item',
             'medicine_type',
             'pack_size',
@@ -26,7 +41,7 @@ class MedicineForm(ModelForm):
         labels = {
             'returnable_item': 'Can Return Item?',
             'patient_package_insert': 'Description PDF File',
-            'unit_of_measurement': 'Unit of Measurement (UOM)'
+            'unit_of_measurement': 'Unit of Measurement (UOM)',
         }
 
     def __init__(self, *args, **kwargs):
