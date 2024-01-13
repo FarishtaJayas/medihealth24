@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm, ModelChoiceField
+from django.forms import ModelForm
 
 from .models import *
 
@@ -8,18 +8,7 @@ class ManufacturerSearchInput(forms.TextInput):
     input_type = 'search'
 
 
-class ManufacturerChoiceField(ModelChoiceField):
-    def label_from_instance(self, obj):
-        return obj.name
-
-
 class MedicineForm(ModelForm):
-    manufacturer = ManufacturerChoiceField(
-        label='Manufacturer',
-        queryset=Manufacturer.objects.all(),
-        widget=ManufacturerSearchInput(attrs={'class': 'input searchable-input'}),
-    )
-
     class Meta:
         model = Medicine
         fields = [
