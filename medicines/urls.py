@@ -16,4 +16,5 @@ urlpatterns = [
     path('create-medicine_type/', create_medicine_type,
          name='create-medicine-type'),
     path('create-manufacturer/', create_manufacturer, name='create-manufacturer'),
+    path('medicines-by-manufacturer/', medicines_by_manufacturer, name='medicines-by-manufacturer'),
 ]

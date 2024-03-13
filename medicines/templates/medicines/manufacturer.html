@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Search Medicines by Manufacturer</h1>
+
+    <form method="get" class="mb-4">
+        <div class="mb-3">
+            <label for="manufacturer_name" class="form-label">Manufacturer Name:</label>
+            <input type="text" name="manufacturer_name" id="manufacturer_name" class="form-control form-control-lg" placeholder="Enter Manufacturer Name">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {% if medicines %}
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Alphabet</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Medicine Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% regroup medicines by name.0|upper as medicines_by_alphabet %}
+                {% for group in medicines_by_alphabet %}
+                    <tr>
+                        <td colspan="3" class="bg-light"><strong>{{ group.grouper }}</strong></td>
+                    </tr>
+                    {% for medicine in group.list %}
+                        <tr>
+                            <td></td>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ medicine.name }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p class="lead">No medicines found for this manufacturer.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

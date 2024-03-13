@@ -946,3 +946,9 @@ img {
     margin-top: 5px;
     display: inline-block;
 }
+
+.center-button {
+  display: flex;
+  justify-content: center;
+}
+

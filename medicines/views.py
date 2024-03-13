@@ -24,6 +24,16 @@ def medicines(request):
     return render(request, 'medicines/medicines.html', context)
 
 
+def medicines_by_manufacturer(request):
+    manufacturer_name = request.GET.get('manufacturer_name', '')
+
+    if manufacturer_name:
+        medicines = Medicine.objects.filter(manufacturer__name__icontains=manufacturer_name).order_by('name')
+    else:
+        medicines = []
+    context = {'medicines': medicines}
+    return render(request, 'medicines/manufacturer.html', context)
+
 def medicine(request, pk):
     medicine = Medicine.objects.get(id=pk)
     context = {'medicine': medicine}
