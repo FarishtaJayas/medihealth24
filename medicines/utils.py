@@ -5,7 +5,7 @@ from .models import Medicine, Manufacturer
 
 def paginate_medicines(request, medicines, results):
     page = request.GET.get('page')
-    results = 6
+    results = results
     paginator = Paginator(medicines, results)
 
     try:

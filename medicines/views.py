@@ -14,7 +14,7 @@ from .utils import search_medicines, paginate_medicines
 
 def medicines(request):
     medicines, search_query = search_medicines(request)
-    custom_range, medicines = paginate_medicines(request, medicines, 6)
+    custom_range, medicines = paginate_medicines(request, medicines, 60)
     medicine_count = Medicine.objects.count()
     context = {'medicines': medicines,
                'search_query': search_query,
